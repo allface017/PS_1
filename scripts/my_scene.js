@@ -13,6 +13,7 @@ class MyScene extends Phaser.Scene {
          // 画像の読み込み(使用する時の名前, パス)
         this.load.image('city', 'assets/background.png');
         this.load.image('taro', 'assets/taro.png');
+        this.load.image('jiro', 'assets/jiro.png');
     }
 
     // シーン初期化処理
@@ -22,7 +23,7 @@ class MyScene extends Phaser.Scene {
         
         this.taro = this.physics.add.sprite(500, 350, 'taro');
 
-
+        this.jiro = this.physics.add.sprite(400, 300, 'jiro');
 
         this.taro_direction = 1;
 
@@ -31,6 +32,30 @@ class MyScene extends Phaser.Scene {
         this.text = this.add.text(10, 10, 'Scene 1').setFontSize(32).setColor('#ff0');
     }
     
+    jiro_move(cursors, object){
+        if(cursors.left.isDown){
+            console.log("Left");
+            object.setVelocityX(5);// 左方向の速度を設定
+        }else if(cursors.right.isDown){
+            console.log("Right!!");
+            object.setVelocityX(-5);// 右方向の速度を設定
+        }else{
+            object.setVelocity(0,0);// 横方向の速度を0
+        }
+    }
+
+    taro_move(cursors, object){
+        if(cursors.left.isDown){
+            console.log("Left");
+            object.setVelocityX(-5);// 左方向の速度を設定
+        }else if(cursors.right.isDown){
+            console.log("Right!!");
+            object.setVelocityX(5);// 右方向の速度を設定
+        }else{
+            object.setVelocity(0,0);// 横方向の速度を0
+        }
+    }
+
   // 毎フレーム実行される繰り返し処理
     update() {
   // プレイヤーの移動
@@ -38,16 +63,20 @@ class MyScene extends Phaser.Scene {
 //         this.taro.setVelocityX(50);
 //         this.taro.setVelocityY(-50);
 //     } 
-        this.taro.angle += 5;
-        
-        if(D_WIDTH < this.taro.x || D_HEIGHT < this.taro.y  ){
-            this.taro.x =500; 
-            this.taro.y =350;
-        }
-        if (this.taro_direction == 1){
-            // 回転角度を設定
-            this.taro.setVelocityX(50);
-            this.taro.setVelocityY(-50);
-        }    
+        // this.taro.angle += 5;
+        // if(D_WIDTH < this.taro.x || D_HEIGHT < this.taro.y  ){
+        //     this.taro.x =500; 
+        //     this.taro.y =350;
+        // }
+        // if (this.taro_direction == 1){
+        //     // 回転角度を設定
+        //     this.taro.setVelocityX(50);
+        //     this.taro.setVelocityY(-50);
+        // }    
+
+        // キーボードの情報を取得
+        let cursors = this.input.keyboard.createCursorKeys();
+        this.jiro_move(cursors, this.jiro);
+        this.taro_move(cursors, this.taro);
     }
 }
