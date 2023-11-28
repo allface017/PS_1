@@ -35,9 +35,19 @@ class MyScene extends Phaser.Scene {
     update() {
   // プレイヤーの移動
 //     if (this.taro_direction == 1) {
-//         this.taro.setVelocityX(45);
-//         this.taro.setVelocityY(-45);
+//         this.taro.setVelocityX(50);
+//         this.taro.setVelocityY(-50);
 //     } 
+        this.taro.angle += 5;
+        
+        if(D_WIDTH < this.taro.x || D_HEIGHT < this.taro.y  ){
+            this.taro.x =500; 
+            this.taro.y =350;
+        }
+        if (this.taro_direction == 1){
+            // 回転角度を設定
+            this.taro.setVelocityX(50);
+            this.taro.setVelocityY(-50);
+        }    
     }
-
 }
