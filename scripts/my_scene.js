@@ -26,6 +26,10 @@ class MyScene extends Phaser.Scene {
 
         this.jiro = this.physics.add.sprite(400, 300, 'jiro');
 
+        //hanakoを表示
+        let x = Phaser.Math.Between(100, 400) ;// y は　50～750の間の値
+        this.hanako = this.physics.add.sprite(x, 100, 'hanako');
+
         this.taro_direction = 1;
 
         this.taro.angle = 0
@@ -65,7 +69,6 @@ class MyScene extends Phaser.Scene {
     
     }
 
-
     
     jiro_move(cursors, object){
         if(cursors.left.isDown){
@@ -78,7 +81,13 @@ class MyScene extends Phaser.Scene {
             object.setVelocity(0,0);// 横方向の速度を0
         }
     }
-
+    hanako_move(keys,object){
+        if(keys.keyW.isDown){ //Wが押されている
+            let x = Phaser.Math.Between(100, 400) ;
+            object.setPosition(x, 100);
+        }
+    }
+    
     taro_move(cursors, object){
         if(cursors.left.isDown){
             console.log("Left");
@@ -113,5 +122,6 @@ class MyScene extends Phaser.Scene {
         let cursors = this.input.keyboard.createCursorKeys();
         this.jiro_move(cursors, this.jiro);
         this.taro_move(cursors, this.taro);
+        this.hanako_move(this.keys,this.hanako);
     }
 }
