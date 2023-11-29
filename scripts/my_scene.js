@@ -14,6 +14,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('city', 'assets/background.png');
         this.load.image('taro', 'assets/taro.png');
         this.load.image('jiro', 'assets/jiro.png');
+        this.load.image('hanako','assets/hanako.png');
     }
 
     // シーン初期化処理
@@ -29,8 +30,42 @@ class MyScene extends Phaser.Scene {
 
         this.taro.angle = 0
 
+        //Myworldを表示
+        this._leftTimeText = this.add.text(600, 400, 'MyWorld ' );
+
+        this.Hello_text = this.add.text(100, 50, 'Hello!');
+        this.Hello_text.setVisible(false);
+
+        this.Hey_text = this.add.text(100, 50, 'Hey!');
+        this.Hey_text.setVisible(false);
+        
         this.text = this.add.text(10, 10, 'Scene 1').setFontSize(32).setColor('#ff0');
+
+        this.input.keyboard.on('keydown-A', function (event) {
+            this.Hello_text.setVisible(true);
+        }, this);
+
+        this.input.keyboard.on('keydown-S', function (event) {
+            this.Hey_text.setVisible(true);
+        }, this);
+
+        this.input.keyboard.on('keydown-D', function (event) {
+            this.Hello_text.setVisible(false);
+            this.Hey_text.setVisible(false);
+        }, this);
+
+
+
+        this.keys = {};
+        this.keys.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.keys.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.keys.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.keys.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    
+    
     }
+
+
     
     jiro_move(cursors, object){
         if(cursors.left.isDown){
