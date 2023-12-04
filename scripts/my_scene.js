@@ -96,12 +96,15 @@ this.physics.add.collider(this.taro, this.hanakoGroup, this.handleCollision, nul
 
 
         this.Hello.setText('痛い！').setVisible(true);
-        this.hanako.destroy();
-        this.time.delayedCall(2000, function () {
-            this.physics.world.enable(taro);
-            this.physics.world.enable(hanako);
-            this.Hello.setVisible(false);
-        }, [], this);
+        this.hanako.destroy();  
+
+        this.add.text(D_WIDTH/3,D_HEIGHT*1/3, '終了 お疲れさまでした', { fontSize: '32px', fill: '#CDC' });
+
+         //物理エンジンを止める
+    this.physics.pause();
+       //カウントダウンタイマーを止めるためにフラグをfalseにする
+    this.countdounTimer = false;
+    return;
     }
     
     // jiro_move(cursors, object){
