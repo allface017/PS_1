@@ -96,7 +96,7 @@ this.physics.add.collider(this.taro, this.hanakoGroup, this.handleCollision, nul
 
 
         this.Hello.setText('痛い！').setVisible(true);
-
+        this.hanako.destroy();
         this.time.delayedCall(2000, function () {
             this.physics.world.enable(taro);
             this.physics.world.enable(hanako);
